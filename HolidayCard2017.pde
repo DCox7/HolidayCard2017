@@ -1,4 +1,3 @@
-
 boolean envAtBottom=false;
 Envelope e = new Envelope(200, 350, 150, 300);
 Letter a;
@@ -9,6 +8,7 @@ float c3=random(0, 255);
 boolean closedEnvelope=true;
 float rando = random(1,4);
 void setup() {
+
   a= new Letter("Happy Christmas and Merry Hanukkah", e, 210,360, 140,280 );
   size(700, 700);
   if (rando==4)
@@ -27,7 +27,9 @@ void draw() {
  
  
   background(c1, 255-c2, 255-c3);
+  strokeWeight(.25);
   s.drawSnow();
+  strokeWeight(1);
    if (e.getX()<0)
     envAtBottom=true;
   if (!closedEnvelope) {
@@ -125,82 +127,20 @@ class Envelope {
     }
   }
 }
-public class Letter
-{
-  String text;
-  float mcxtext;
-  float mcytext;
-  float xftext;
-  float yftext;
-  float trixPos;
-  float triyPos; 
-  float trixPos2;
-  float triyPos2;
-  float trixPos3;
-  float triyPos3;
-  float letterX;
-  float letterY;
-  float letterX2;
-  float letterY2;
-  float letterX3;
-  float letterY3;
-float x;
-float y;
-float length;
-float width;
-  public Letter(String t, Envelope e, float x1, float y1, float l, float w)
-  { length =l;
+class Envelope {
+
+  private float x;
+  private float y;
+  private float length;
+  private float width;
+
+  Envelope(float xv, float yv, float w, float l) {
+    x=xv;
+    y=yv;
+    length=l;
     width=w;
-    x=x1;
-  y=y1;
-    text = t;
-    trixPos = e.getX();
-    triyPos = e.getY();
-    trixPos2 = e.getX() + e.getLength();
-    triyPos2 = e.getY();
-    trixPos3 = e.getX() + e.getLength()/2;
-    triyPos3 = e.getY() - 75;
-
-    letterX = e.getX() + 10;
-    letterY = e.getY() + 5;
-    letterX2 = e.getX() + 290;
-    letterY2 = e.getY() + 5;
-    letterX3 = (letterX + letterX2)/2;
-    letterY3 = e.getY() + e.getWidth()/2;
   }
 
-  public void openEnvelope()
-  {
-    strokeWeight(.2);
-    fill(255);
-    triangle(trixPos, triyPos, trixPos2, triyPos2, trixPos3, triyPos3);
-  }
-
-  public void moveEnvelope(Envelope e)
-  {
-    if (!envAtBottom) {
-      e.setX(e.getX() - 1);
-      e.setLength(e.getLength() + 2);
-
-      e.setY(e.getY() + 1);
-      e.setWidth(e.getWidth() + 1);
-
-      trixPos -= 1;
-      triyPos += 1;
-      trixPos2 += 1;
-      triyPos2 += 1;
-      triyPos3 += .5;
-
-      letterX -= 1;
-      letterY += 1;
-      letterX2 += 1;
-      letterY2 += 1;
-      letterY3 += 1.5;
-
-      openEnvelope();
-      e.display(this);
-    }
-  }
   float getX() {
     return x;
   }
@@ -216,7 +156,8 @@ float width;
   void setY(float yv) {
     y=yv;
   }
-    float getLength() {
+
+  float getLength() {
     return length;
   } 
 
@@ -231,46 +172,36 @@ float width;
   void setWidth(float w) {
     width=w;
   }
-  public void drawLetter() {
-    xftext=x+70;
-    yftext=y+200;
-    mcxtext=x+70;
-    mcytext=y+100;
-    fill(245, 216, 165);
-    stroke(0);
-    rect(x, y, width, length);
-    fill(0);
-    if (envAtBottom){
-      textSize(29);
-      text(text, mcxtext, mcytext);
-      PImage b = loadImage("Screen Shot 2017-12-14 at 9.40.26 AM copy.png");
-       image(b, xftext, yftext);
-       PImage m = loadImage("Screen Shot 2017-12-14 at 9.40.26 AM.png");
-       image(m, xftext+360, yftext);
-       
-    }
+
+  void display(Letter boop) {
+    strokeWeight(.1);
     fill(255);
+   rect(x, y, length, width);
+
+     if (!closedEnvelope)
+     boop.drawLetter();
+    triangle(x, y, x + length/2, y + width/2, x, y + width);
+    triangle(x, y+width, x+length/2, y+width/2, x+length, y+width);
+    triangle(x+length, y, x + length/2, y + width/2, x + length, y + width);
+      if (!!!!!!!!closedEnvelope)
+     triangle(x, y, x+length/2, y+width/2 + 20, x+length, y);
+   
+   
+   
+
+    textSize(45);
+    fill(c1, c2, c3);
+    if (closedEnvelope)
+    {
+      stroke (80, 255, 80);
+      strokeWeight(.5);
+      fill(255, 70, 70);
+      ellipse(x + length/2, y + width/2 + 16, 30, 30);
+      fill(c1, c2, c3);
+      text("Click to Open", x, y-100);
+      stroke(0);
+    }
   }
-  public void moveLetter() {
-    if (!envAtBottom) {
-      x=x - 1;
-      length=length+ 1;
-     
-     y=y + 1;
-     width=width + 2;
-  }
-  else {
-    yftext-=1;
-    y-=1;
-    if (length<800)
-   length+=1;
-    
-    
-    
-    
-    
-  }
-}
 }
 class Snow
 {
