@@ -9,7 +9,7 @@ boolean closedEnvelope=true;
 float rando = random(1,4);
 void setup() {
 
-  a= new Letter("Happy Christmas and Merry Hanukkah", e, 210,360, 140,280 );
+  a= new Letter("Happy Christmas and Merry Hanukkah and Merry Holidays", e, 210,360, 140,280 );
   size(700, 700);
   if (rando==4)
   background(255-c1, 255-c2, 255-c3);
