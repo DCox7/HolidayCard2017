@@ -243,18 +243,20 @@ float width;
     rect(x, y, width, length);
     fill(0);
     if (envAtBottom){
-      textSize(29);
+      textSize(18);
       fill(255, 0, 0 );
+      
       text(text, mcxtext, mcytext);
       PImage b = loadImage("Left.png");
        image(b, xftext, yftext);
        PImage m = loadImage("Right.png");
        image(m, xftext+360, yftext);
-      fill (115, 255, 115);
+      fill (115, 240, 115);
       textSize(50);
-      text("Rey Dies\nand BB8\nExplodes", xftext+155, yftext+55);
-      fill(0);
-      text("You're Welcome", xftext+98, yftext+570);
+      text("Phantom \nMenace\nWas\nBetter", xftext+155, yftext+55);
+      fill(255,0,0);
+      textSize(18);
+      text("Jar-Jar Binks Sith Lord Confirmed", xftext+98, yftext+570);
       
   }
     fill(255);
